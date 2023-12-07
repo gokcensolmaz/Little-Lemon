@@ -12,6 +12,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -24,14 +25,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LittleLemonLoginTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background
-                ) {
-                    MainComponent()
-                }
-            }
+            MainComponent()
         }
     }
 }
@@ -42,7 +36,7 @@ fun MainComponent() {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .background(Color(0Xff495e57))
     ) {
         Text(
@@ -57,20 +51,33 @@ fun MainComponent() {
             color = Color(0xFFFfffff),
             modifier = Modifier.padding(start = 20.dp)
         )
-        Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.Center) {
-            Button(
-                onClick = { },
-                border = BorderStroke(1.dp, Color.Red),
-                shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray)
-            ) {
-                Text(text = stringResource(id = R.string.order))
-            }
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(20.dp),
+            horizontalArrangement = Arrangement.Start
+        ) {
+            Text(
+                text = stringResource(id = R.string.description),
+                Modifier.width(200.dp),
+                color = Color.White,
+                fontSize = 21.sp
+            )
             Image(
                 painter = painterResource(id = R.drawable.little_lemon),
                 contentDescription = "",
-                Modifier.height(100.dp)
+                Modifier
+                    .height(200.dp)
+                    .clip(RoundedCornerShape(20.dp)),
             )
+        }
+        Button(
+            onClick = { },
+            shape = RoundedCornerShape(10.dp),
+            modifier = Modifier.padding(horizontal = 20.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xfff4ce14))
+        ) {
+            Text(text = stringResource(id = R.string.order))
         }
 
     }
