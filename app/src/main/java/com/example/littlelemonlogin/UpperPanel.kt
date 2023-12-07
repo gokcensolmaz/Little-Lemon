@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.LocalAbsoluteElevation
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,52 +25,43 @@ import androidx.compose.ui.unit.sp
 fun UpperPanel() {
     val context = LocalContext.current
     Column(
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.Start,
         modifier = Modifier
-            .fillMaxWidth()
             .background(Color(0Xff495e57))
+            .padding(start = 12.dp, end = 12.dp, top = 16.dp, bottom = 16.dp)
     ) {
         Text(
             text = stringResource(id = R.string.little_lemon),
-            fontSize = 32.sp,
+            fontSize = 40.sp,
             color = Color(0xFFF4CE14),
-            modifier = Modifier.padding(start = 20.dp, top = 20.dp),
             fontWeight = FontWeight.ExtraBold
         )
         Text(
             text = stringResource(id = R.string.chicago),
             fontSize = 24.sp,
-            color = Color(0xFFFfffff),
-            modifier = Modifier.padding(start = 20.dp)
+            color = Color(0xFFEDEFEE),
         )
         Row(
-            horizontalArrangement = Arrangement.Start,
             modifier = Modifier
-                .fillMaxWidth()
-
-
+                .padding(top=18.dp)
         ) {
             Text(
                 text = stringResource(id = R.string.description),
                 Modifier
-                    .width(220.dp)
-                    .padding(28.dp)
+                    .padding(bottom=28.dp)
                     .fillMaxWidth(0.6f),
-                color = Color.White,
-                fontSize = 21.sp
+                color = Color(0xFFEDEFEE),
+                fontSize = 18.sp
             )
             Image(
-                painter = painterResource(id = R.drawable.little_lemon),
+                painter = painterResource(id = R.drawable.upper_panel_image),
                 contentDescription = "Upper Panel Image",
                 Modifier
                     .clip(RoundedCornerShape(20.dp))
-                    .height(200.dp),
             )
         }
         Button(
             onClick = {
-                Toast.makeText(context, "Order Successful!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Order received. Thank you!", Toast.LENGTH_SHORT).show()
             },
             shape = RoundedCornerShape(20.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xfff4ce14))
