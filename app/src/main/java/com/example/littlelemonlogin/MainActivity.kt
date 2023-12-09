@@ -1,5 +1,6 @@
 package com.example.littlelemonlogin
 
+import android.content.ClipData.Item
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -15,6 +16,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,46 +34,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             //HomeScreen()
-            ItemOrder()
+            //AppScreen()
+            LoginScreen()
         }
     }
 
-    @Composable
-    private fun ItemOrder() {
-        var counter by remember {
-            mutableStateOf(0)
-        }
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(
-                text = "Greek Salad",
-                fontSize = 30.sp
-            )
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconButton(onClick = { counter-- }) {
-                    Icon(
-                        imageVector = Icons.Default.Remove,
-                        contentDescription = "Remove"
-                    )
-                }
-                Text(
-                    text = "$counter",
-                    fontSize = 28.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(8.dp)
-                )
-                IconButton(onClick = { counter++ }) {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = "Add"
-                    )
-                }
-            }
-        }
-    }
+
 }
 
 @Composable
@@ -82,8 +50,61 @@ fun HomeScreen() {
     }
 }
 
+@Composable
+fun AppScreen() {
+    var counter by rememberSaveable() {
+        mutableStateOf(0)
+    }
+    ItemOrder(counter, { counter++ }, { counter-- })
+}
+
+@Composable
+fun ItemOrder(counter: Int, onIncrement: () -> Unit, onDecrement: () -> Unit) {
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Card(modifier = Modifier.padding(32.dp)) {
+            Column(modifier = Modifier.padding(20.dp)) {
+                Text(
+                    text = "Greek Salad", fontWeight = FontWeight.W700, fontSize = 30.sp
+                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    IconButton(onClick = { onDecrement()}) {
+                        Icon(
+                            imageVector = Icons.Default.Remove, contentDescription = "Remove"
+                        )
+                    }
+                    Text(
+                        text = "$counter",
+                        fontSize = 28.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(8.dp)
+                    )
+                    IconButton(onClick = { onIncrement() }) {
+                        Icon(
+                            imageVector = Icons.Default.Add, contentDescription = "Add"
+                        )
+                    }
+                }
+                Button(
+                    onClick = {}, modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(text = "Add")
+                }
+            }
 
 
+        }
+
+    }
+}
 
 
 
