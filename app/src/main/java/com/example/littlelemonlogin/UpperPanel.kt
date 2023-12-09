@@ -27,7 +27,7 @@ fun UpperPanel() {
     Column(
         modifier = Modifier
             .background(Color(0Xff495e57))
-            .padding(start = 12.dp, end = 12.dp, top = 16.dp, bottom = 16.dp)
+            .padding(start = 12.dp, end = 12.dp, top = 16.dp, bottom = 16.dp).fillMaxWidth()
     ) {
         Text(
             text = stringResource(id = R.string.little_lemon),

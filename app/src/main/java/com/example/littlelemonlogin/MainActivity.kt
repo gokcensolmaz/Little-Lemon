@@ -33,9 +33,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            //HomeScreen()
+            HomeScreen()
             //AppScreen()
-            LoginScreen()
+            //LoginScreen()
         }
     }
 
@@ -44,10 +44,17 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun HomeScreen() {
-    Column {
-        UpperPanel()
-        LowerPanel()
-    }
+
+
+ Scaffold(
+     topBar = { TopAppBar() }
+ ) {
+
+     Column {
+         UpperPanel()
+         LowerPanel()
+     }
+ }
 }
 
 @Composable
