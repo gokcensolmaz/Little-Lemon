@@ -10,7 +10,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Remove
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,17 +31,58 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            HomeScreen()
+            //HomeScreen()
+            ItemOrder()
+        }
+    }
+
+    @Composable
+    private fun ItemOrder() {
+        var counter by remember {
+            mutableStateOf(0)
+        }
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(
+                text = "Greek Salad",
+                fontSize = 30.sp
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(onClick = { counter-- }) {
+                    Icon(
+                        imageVector = Icons.Default.Remove,
+                        contentDescription = "Remove"
+                    )
+                }
+                Text(
+                    text = "$counter",
+                    fontSize = 28.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(8.dp)
+                )
+                IconButton(onClick = { counter++ }) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = "Add"
+                    )
+                }
+            }
         }
     }
 }
+
 @Composable
-fun HomeScreen(){
+fun HomeScreen() {
     Column {
         UpperPanel()
         LowerPanel()
     }
 }
+
+
 
 
 
