@@ -102,9 +102,7 @@ fun MyBottomNavigation(navController: NavHostController) {
                 }
             )
         }
-
     }
-
 }
 
 
