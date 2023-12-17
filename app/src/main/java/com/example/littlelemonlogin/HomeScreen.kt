@@ -3,13 +3,11 @@ package com.example.littlelemonlogin
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -20,12 +18,51 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
     Column {
         UpperPanel(navController)
         LowerPanel()
+    }
+}
+
+@Composable
+fun TopAppBar(scaffoldState: ScaffoldState?= null, scope: CoroutineScope? = null) {
+    Box(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        IconButton(
+            onClick = {
+                scope?.launch { scaffoldState?.drawerState?.open() }
+            }, modifier = Modifier.align(Alignment.CenterStart)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_hamburger_menu),
+                contentDescription = "Menu Icon"
+            )
+        }
+
+        Image(
+            painter = painterResource(id = R.drawable.littlelemonimgtxt_nobg),
+            contentDescription = "Little Lemon Logo",
+            modifier = Modifier
+                .fillMaxWidth(.32f)
+                .align(Alignment.Center)
+        )
+
+        IconButton(
+            onClick = { /*TODO*/ }, modifier = Modifier.align(Alignment.CenterEnd)
+        ) {
+            Box {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_basket),
+                    contentDescription = "Basket"
+                )
+            }
+        }
     }
 }
 
@@ -69,7 +106,7 @@ fun UpperPanel(navController: NavHostController) {
         Button(
             onClick = {
                 Toast.makeText(context, "Order received. Thank you!", Toast.LENGTH_SHORT).show()
-                navController.navigate(MenuList.route)
+                navController.navigate(Menu.route)
             },
             shape = RoundedCornerShape(20.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xfff4ce14))
