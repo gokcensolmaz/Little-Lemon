@@ -18,14 +18,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            //MyNavigation()
-            //HomeScreen()
             AppScreen()
-            //LoginScreen()
         }
     }
-
-
 }
 
 @Composable
@@ -104,9 +99,3 @@ fun MyBottomNavigation(navController: NavHostController) {
         }
     }
 }
-
-
-
-
-
-

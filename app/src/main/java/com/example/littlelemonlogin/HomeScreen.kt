@@ -17,6 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.littlelemonlogin.data.Categories
+import com.example.littlelemonlogin.data.Dish
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -89,7 +91,7 @@ fun UpperPanel(navController: NavHostController) {
             modifier = Modifier.padding(top = 18.dp)
         ) {
             Text(
-                text = stringResource(id = R.string.description),
+                text = stringResource(id = R.string.description_greek_salad),
                 Modifier
                     .padding(bottom = 28.dp)
                     .fillMaxWidth(0.6f),
@@ -117,7 +119,6 @@ fun UpperPanel(navController: NavHostController) {
                 color = Color(0xFF333333)
             )
         }
-
     }
 }
 
@@ -135,7 +136,7 @@ fun LowerPanel() {
             }
         }
         WeeklySpecialCard()
-        MenuDish()
+        MenuDish(Dish("Bruschetta", "$9.99", R.string.description_bruschetta,   R.drawable.bruschetta))
     }
 }
 
@@ -149,220 +150,6 @@ fun WeeklySpecialCard() {
             modifier = Modifier.padding(8.dp)
         )
     }
-
 }
 
-@Composable
-fun MenuDish() {
-    // TODO:  Lazy Column eklenecek
-    Card() {
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            Column() {
-                Text(text = "Greek Salad", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                Text(
-                    text = "The famous Greek Salad of crispy lettuce, peppers, olives, our Chicago...",
-                    color = Color.Gray,
-                    modifier = Modifier
-                        .padding(top = 5.dp, bottom = 8.dp)
-                        .fillMaxWidth(0.75f)
-                )
-                Text(text = "$12.99", color = Color.Gray, fontWeight = FontWeight.Bold)
-            }
-            Image(
-                painter = painterResource(id = R.drawable.greeksalad),
-                contentDescription = "Greek Salad Image"
-            )
-        }
-    }
-    Card() {
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            Column() {
-                Text(text = "Greek Salad", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                Text(
-                    text = "The famous Greek Salad of crispy lettuce, peppers, olives, our Chicago...",
-                    color = Color.Gray,
-                    modifier = Modifier
-                        .padding(top = 5.dp, bottom = 8.dp)
-                        .fillMaxWidth(0.75f)
-                )
-                Text(text = "$12.99", color = Color.Gray, fontWeight = FontWeight.Bold)
-            }
-            Image(
-                painter = painterResource(id = R.drawable.greeksalad),
-                contentDescription = "Greek Salad Image"
-            )
-        }
-    }
-    Card() {
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            Column() {
-                Text(text = "Greek Salad", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                Text(
-                    text = "The famous Greek Salad of crispy lettuce, peppers, olives, our Chicago...",
-                    color = Color.Gray,
-                    modifier = Modifier
-                        .padding(top = 5.dp, bottom = 8.dp)
-                        .fillMaxWidth(0.75f)
-                )
-                Text(text = "$12.99", color = Color.Gray, fontWeight = FontWeight.Bold)
-            }
-            Image(
-                painter = painterResource(id = R.drawable.greeksalad),
-                contentDescription = "Greek Salad Image"
-            )
-        }
-    }
-    Card() {
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            Column() {
-                Text(text = "Greek Salad", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                Text(
-                    text = "The famous Greek Salad of crispy lettuce, peppers, olives, our Chicago...",
-                    color = Color.Gray,
-                    modifier = Modifier
-                        .padding(top = 5.dp, bottom = 8.dp)
-                        .fillMaxWidth(0.75f)
-                )
-                Text(text = "$12.99", color = Color.Gray, fontWeight = FontWeight.Bold)
-            }
-            Image(
-                painter = painterResource(id = R.drawable.greeksalad),
-                contentDescription = "Greek Salad Image"
-            )
-        }
-    }
-    Card() {
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            Column() {
-                Text(text = "Greek Salad", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                Text(
-                    text = "The famous Greek Salad of crispy lettuce, peppers, olives, our Chicago...",
-                    color = Color.Gray,
-                    modifier = Modifier
-                        .padding(top = 5.dp, bottom = 8.dp)
-                        .fillMaxWidth(0.75f)
-                )
-                Text(text = "$12.99", color = Color.Gray, fontWeight = FontWeight.Bold)
-            }
-            Image(
-                painter = painterResource(id = R.drawable.greeksalad),
-                contentDescription = "Greek Salad Image"
-            )
-        }
-    }
-    Card() {
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            Column() {
-                Text(text = "Greek Salad", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                Text(
-                    text = "The famous Greek Salad of crispy lettuce, peppers, olives, our Chicago...",
-                    color = Color.Gray,
-                    modifier = Modifier
-                        .padding(top = 5.dp, bottom = 8.dp)
-                        .fillMaxWidth(0.75f)
-                )
-                Text(text = "$12.99", color = Color.Gray, fontWeight = FontWeight.Bold)
-            }
-            Image(
-                painter = painterResource(id = R.drawable.greeksalad),
-                contentDescription = "Greek Salad Image"
-            )
-        }
-    }
-    Card() {
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            Column() {
-                Text(text = "Greek Salad", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                Text(
-                    text = "The famous Greek Salad of crispy lettuce, peppers, olives, our Chicago...",
-                    color = Color.Gray,
-                    modifier = Modifier
-                        .padding(top = 5.dp, bottom = 8.dp)
-                        .fillMaxWidth(0.75f)
-                )
-                Text(text = "$12.99", color = Color.Gray, fontWeight = FontWeight.Bold)
-            }
-            Image(
-                painter = painterResource(id = R.drawable.greeksalad),
-                contentDescription = "Greek Salad Image"
-            )
-        }
-    }
-    Card() {
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            Column() {
-                Text(text = "Greek Salad", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                Text(
-                    text = "The famous Greek Salad of crispy lettuce, peppers, olives, our Chicago...",
-                    color = Color.Gray,
-                    modifier = Modifier
-                        .padding(top = 5.dp, bottom = 8.dp)
-                        .fillMaxWidth(0.75f)
-                )
-                Text(text = "$12.99", color = Color.Gray, fontWeight = FontWeight.Bold)
-            }
-            Image(
-                painter = painterResource(id = R.drawable.greeksalad),
-                contentDescription = "Greek Salad Image"
-            )
-        }
-    }
-    Card() {
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            Column() {
-                Text(text = "Greek Salad", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                Text(
-                    text = "The famous Greek Salad of crispy lettuce, peppers, olives, our Chicago...",
-                    color = Color.Gray,
-                    modifier = Modifier
-                        .padding(top = 5.dp, bottom = 8.dp)
-                        .fillMaxWidth(0.75f)
-                )
-                Text(text = "$12.99", color = Color.Gray, fontWeight = FontWeight.Bold)
-            }
-            Image(
-                painter = painterResource(id = R.drawable.greeksalad),
-                contentDescription = "Greek Salad Image"
-            )
-        }
-    }
-
-
-}
 
