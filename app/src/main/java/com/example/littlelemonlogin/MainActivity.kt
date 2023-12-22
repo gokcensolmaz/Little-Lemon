@@ -12,6 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -19,91 +20,96 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.littlelemonlogin.ui.theme.LittleLemonColor
+import com.example.littlelemonlogin.ui.theme.LittleLemonLoginTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AppScreen()
+            LittleLemonLoginTheme() {
+                AppScreen()
+            }
         }
     }
 }
+
 /***&****Some Trials****&
 @Composable
 fun AppScreen() {
-    LittleLemonLoginTheme() {
-        Column() {
-            Text(
-                text = "Gökçen", style = TextStyle(
-                    fontSize = 24.sp,
-                    color = LittleLemonColor.yellow,
-                    fontFamily = FontFamily.Monospace,
-                    letterSpacing = 4.sp,
-                    shadow = Shadow(
-                        color = Color.Black, offset = Offset(8f, 8f), blurRadius = 4f
-                    ),
-                    textAlign = TextAlign.Center,
-                    textDecoration = TextDecoration.Underline
-                ),
-                modifier = Modifier.width(300.dp),
+LittleLemonLoginTheme() {
+Column() {
+Text(
+text = "Gökçen", style = TextStyle(
+fontSize = 24.sp,
+color = LittleLemonColor.yellow,
+fontFamily = FontFamily.Monospace,
+letterSpacing = 4.sp,
+shadow = Shadow(
+color = Color.Black, offset = Offset(8f, 8f), blurRadius = 4f
+),
+textAlign = TextAlign.Center,
+textDecoration = TextDecoration.Underline
+),
+modifier = Modifier.width(300.dp),
 
-            )
-            Text(
-                buildAnnotatedString {
-                    withStyle(
-                        style = SpanStyle(
-                            color = LittleLemonColor.yellow,
-                            fontSize = 20.sp
-                        )
-                    ){
-                        append("G")
-                    }
-                    append("ökçen")
-                }
-            )
+)
+Text(
+buildAnnotatedString {
+withStyle(
+style = SpanStyle(
+color = LittleLemonColor.yellow,
+fontSize = 20.sp
+)
+){
+append("G")
+}
+append("ökçen")
+}
+)
 
-            Surface(
-                color = LittleLemonColor.yellow, modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = "Lemon",
-                    fontSize = 40.sp,
-                    modifier = Modifier
-                        .padding(30.dp)
-                        .wrapContentSize(align = Alignment.TopStart)
-                        .border(2.dp, LittleLemonColor.charcoal)
-                )
+Surface(
+color = LittleLemonColor.yellow, modifier = Modifier.fillMaxWidth()
+) {
+Text(
+text = "Lemon",
+fontSize = 40.sp,
+modifier = Modifier
+.padding(30.dp)
+.wrapContentSize(align = Alignment.TopStart)
+.border(2.dp, LittleLemonColor.charcoal)
+)
 
-            }
-            Surface(
-                color = LittleLemonColor.pink, modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = "Lemon",
-                    fontSize = 80.sp,
-                    modifier = Modifier
-                        .padding(30.dp)
-                        .wrapContentSize(align = Alignment.TopStart)
-                        .border(2.dp, LittleLemonColor.charcoal)
-                )
+}
+Surface(
+color = LittleLemonColor.pink, modifier = Modifier.fillMaxWidth()
+) {
+Text(
+text = "Lemon",
+fontSize = 80.sp,
+modifier = Modifier
+.padding(30.dp)
+.wrapContentSize(align = Alignment.TopStart)
+.border(2.dp, LittleLemonColor.charcoal)
+)
 
-            }
-        }
-    }
+}
+}
+}
 }
 
 @Preview(showBackground = true)
 @Composable
 fun AppScreenPreviewLight() {
-    AppScreen()
+AppScreen()
 }
 
 @Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun AppScreenPreviewDark() {
-    AppScreen()
+AppScreen()
 }
-**/
+ **/
 @Composable
 fun AppScreen() {
 
@@ -149,7 +155,8 @@ fun MyNavigation(navController: NavHostController) {
             DishDetails.route + "/{${DishDetails.argDishId}}",
             arguments = listOf(navArgument(DishDetails.argDishId) { type = NavType.IntType })
         ) {
-            val id = requireNotNull(it.arguments?.getInt(DishDetails.argDishId)) { "Dish id is null" }
+            val id =
+                requireNotNull(it.arguments?.getInt(DishDetails.argDishId)) { "Dish id is null" }
             DishDetails(id)
         }
     }
@@ -168,10 +175,12 @@ fun MyBottomNavigation(navController: NavHostController) {
             BottomNavigationItem(label = { Text(text = destination.title) }, icon = {
                 Icon(
                     painter = painterResource(id = destination.icon!!),
-                    contentDescription = destination.title
+                    contentDescription = destination.title,
+                    tint = if (index == selectedIndex.value) LittleLemonColor.yellow else LittleLemonColor.charcoal
                 )
             }, selected = index == selectedIndex.value, onClick = {
                 selectedIndex.value = index
+
                 navController.navigate(destinationList[index].route) {
                     popUpTo(Home.route)
                     launchSingleTop = true
