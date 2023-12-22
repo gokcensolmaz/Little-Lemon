@@ -1,15 +1,8 @@
 package com.example.littlelemonlogin
 
-import android.graphics.drawable.Icon
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.ui.graphics.vector.ImageVector
-
 interface Destinations {
     val route: String
-    val icon: Int
+    val icon: Int?
     val title: String
 }
 
@@ -34,4 +27,11 @@ object Location : Destinations {
     override val route: String = "Location"
     override val icon: Int = R.drawable.ic_location
     override val title: String = "Location"
+}
+
+object DishDetails : Destinations {
+    override val route: String = "Menu"
+    override val icon: Int? = null
+    override val title: String = "Menu"
+    const val argDishId = "dishId"
 }

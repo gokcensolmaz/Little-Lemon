@@ -3,6 +3,9 @@ package com.example.littlelemonlogin
 import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -13,56 +16,63 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.littlelemonlogin.data.Categories
 import com.example.littlelemonlogin.data.Dish
+import com.example.littlelemonlogin.data.DishRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
     Column {
         UpperPanel(navController)
-        LowerPanel()
+        LowerPanel(navController,DishRepository.dishes)
     }
 }
 
 @Composable
 fun TopAppBar(scaffoldState: ScaffoldState? = null, scope: CoroutineScope? = null) {
-    Box(
-        modifier = Modifier.fillMaxWidth()
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
             onClick = {
                 scope?.launch { scaffoldState?.drawerState?.open() }
-            }, modifier = Modifier.align(Alignment.CenterStart)
+            }
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_hamburger_menu),
-                contentDescription = "Menu Icon"
+                contentDescription = "Menu Icon",
+                modifier = Modifier.size(24.dp)
             )
         }
 
         Image(
-            painter = painterResource(id = R.drawable.littlelemonimgtxt_nobg),
+            painter = painterResource(id = R.drawable.littlelemonimgtxt),
             contentDescription = "Little Lemon Logo",
             modifier = Modifier
-                .fillMaxWidth(.32f)
-                .align(Alignment.Center)
+                .fillMaxWidth(.5f)
+                .padding(horizontal = 20.dp)
         )
 
         IconButton(
-            onClick = { /*TODO*/ }, modifier = Modifier.align(Alignment.CenterEnd)
+            onClick = { /*TODO*/ }
         ) {
-            Box {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_basket),
-                    contentDescription = "Basket"
-                )
-            }
+
+            Image(
+                painter = painterResource(id = R.drawable.ic_basket),
+                contentDescription = "Basket",
+                modifier = Modifier.size(24.dp)
+            )
         }
     }
 }
@@ -91,7 +101,7 @@ fun UpperPanel(navController: NavHostController) {
             modifier = Modifier.padding(top = 18.dp)
         ) {
             Text(
-                text = stringResource(id = R.string.description_greek_salad),
+                text = stringResource(id = R.string.description),
                 Modifier
                     .padding(bottom = 28.dp)
                     .fillMaxWidth(0.6f),
@@ -114,17 +124,21 @@ fun UpperPanel(navController: NavHostController) {
         ) {
             Text(
                 text = stringResource(id = R.string.order_button_text),
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF333333)
+                style = TextStyle(
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF333333)
+                )
+
+
             )
         }
     }
 }
 
 @Composable
-fun LowerPanel() {
-    Column (modifier = Modifier.verticalScroll(rememberScrollState())){
+fun LowerPanel(navController: NavHostController,dishes: List<Dish> = listOf()) {
+    Column() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -136,10 +150,21 @@ fun LowerPanel() {
             }
         }
         WeeklySpecialCard()
-        MenuDish(Dish("Bruschetta", "$9.99", R.string.description_bruschetta,   R.drawable.bruschetta))
+        LazyColumn {
+            items(dishes.size) {  index ->
+                MenuDish(navController, dishes[index])
+            }
+        }
+        /*Column() {
+            DishRepository.weekly_special_dishes.forEach { dish ->
+                MenuDish(
+                    navController = navController,
+                    dish
+                )
+            }
+        }*/
     }
 }
-
 @Composable
 fun WeeklySpecialCard() {
     Card(modifier = Modifier.fillMaxWidth()) {

@@ -2,9 +2,8 @@
     <string name="app_name">Little Lemon Login</string>
     <string name="little_lemon">Little Lemon</string>
     <string name="chicago">Chicago</string>
+    <string name="description">We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.</string>
     <string name="order_button_text">Order Take Away</string>
     <string name="weekly_special">Weekly Special</string>
-    <string name="description_greek_salad">We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.</string>
-    <string name="description_bruschetta">Our Bruschetta is made from grilled bread that has been smeared with garlic…</string>
-    <string name="description_lemon_dessert">This comes straight from grandma recipe book, every last ingredient has…</string>
+    <string name="add_for">Add for</string>
 </resources>

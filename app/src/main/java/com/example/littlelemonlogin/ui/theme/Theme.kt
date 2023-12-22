@@ -7,15 +7,15 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = LittleLemonColor.green,
+    primaryVariant = LittleLemonColor.yellow,
+    secondary = LittleLemonColor.orange
 )
 
 private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = LittleLemonColor.yellow,
+    primaryVariant = LittleLemonColor.orange,
+    secondary = LittleLemonColor.pink
 
     /* Other default colors to override
     background = Color.White,
@@ -37,7 +37,6 @@ fun LittleLemonLoginTheme(
     } else {
         LightColorPalette
     }
-
     MaterialTheme(
         colors = colors,
         typography = Typography,
